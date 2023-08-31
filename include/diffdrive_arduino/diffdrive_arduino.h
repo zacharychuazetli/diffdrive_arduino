@@ -46,8 +46,10 @@ private:
   Config cfg_;
   ArduinoComms arduino_;
 
-  Wheel l_wheel_;
-  Wheel r_wheel_;
+  Wheel F_l_wheel_;
+  Wheel F_r_wheel_;
+  Wheel B_l_wheel_;
+  Wheel B_r_wheel_;
 
   rclcpp::Logger logger_;
 

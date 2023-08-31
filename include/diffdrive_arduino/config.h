@@ -6,8 +6,10 @@
 
 struct Config
 {
-  std::string left_wheel_name = "left_wheel";
-  std::string right_wheel_name = "right_wheel";
+  std::string F_left_wheel_name = "F_left_wheel";
+  std::string F_right_wheel_name = "F_right_wheel";
+  std::string B_left_wheel_name = "B_left_wheel";
+  std::string B_right_wheel_name = "B_right_wheel";
   float loop_rate = 30;
   std::string device = "/dev/ttyUSB0";
   int baud_rate = 57600;

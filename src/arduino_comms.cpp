@@ -19,10 +19,10 @@ void ArduinoComms::setup(const std::string &serial_device, int32_t baud_rate, in
 
 void ArduinoComms::sendEmptyMsg()
 {
-    std::string response = sendMsg("\r");
+    std::string response = sendMsg("r\r");
 }
 
-void ArduinoComms::readEncoderValues(int &val_1, int &val_2)
+void ArduinoComms::readEncoderValues(int &val_1, int &val_2, int &val_3, int &val_4)
 {
     std::string response = sendMsg("e\r");
 
@@ -30,15 +30,19 @@ void ArduinoComms::readEncoderValues(int &val_1, int &val_2)
     size_t del_pos = response.find(delimiter);
     std::string token_1 = response.substr(0, del_pos);
     std::string token_2 = response.substr(del_pos + delimiter.length());
+    std::string token_3 = response.substr(del_pos + delimiter.length());
+    std::string token_4 = response.substr(del_pos + delimiter.length());
 
     val_1 = std::atoi(token_1.c_str());
     val_2 = std::atoi(token_2.c_str());
+    val_3 = std::atoi(token_3.c_str());
+    val_4 = std::atoi(token_4.c_str());
 }
 
-void ArduinoComms::setMotorValues(int val_1, int val_2)
+void ArduinoComms::setMotorValues(int val_1, int val_2, int val_3, int val_4)
 {
     std::stringstream ss;
-    ss << "m " << val_1 << " " << val_2 << "\r";
+    ss << "m " << val_1 << " " << val_2 << " " << val_3 << " " << val_4 << "\r";
     sendMsg(ss.str(), false);
 }
 
