@@ -20,8 +20,8 @@ return_type FakeRobot::configure(const hardware_interface::HardwareInfo & info)
 
   time_ = std::chrono::system_clock::now();
 
-  cfg_.left_wheel_name = info_.hardware_parameters["F_left_wheel_name"];
-  cfg_.right_wheel_name = info_.hardware_parameters["F_right_wheel_name"];
+  cfg_.F_left_wheel_name = info_.hardware_parameters["left_wheel_name"];
+  cfg_.F_right_wheel_name = info_.hardware_parameters["right_wheel_name"];
 
 
   // Set up the wheels
@@ -43,10 +43,10 @@ std::vector<hardware_interface::StateInterface> FakeRobot::export_state_interfac
 
   std::vector<hardware_interface::StateInterface> state_interfaces;
 
-  state_interfaces.emplace_back(hardware_interface::StateInterface(F_l_wheel_.name, hardware_interface::HW_IF_VELOCITY, &F_l_wheel_.vel));
-  state_interfaces.emplace_back(hardware_interface::StateInterface(F_l_wheel_.name, hardware_interface::HW_IF_POSITION, &F_l_wheel_.pos));
-  state_interfaces.emplace_back(hardware_interface::StateInterface(F_r_wheel_.name, hardware_interface::HW_IF_VELOCITY, &F_r_wheel_.vel));
-  state_interfaces.emplace_back(hardware_interface::StateInterface(F_r_wheel_.name, hardware_interface::HW_IF_POSITION, &F_r_wheel_.pos));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(l_wheel_.name, hardware_interface::HW_IF_VELOCITY, &l_wheel_.vel));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(l_wheel_.name, hardware_interface::HW_IF_POSITION, &l_wheel_.pos));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(r_wheel_.name, hardware_interface::HW_IF_VELOCITY, &r_wheel_.vel));
+  state_interfaces.emplace_back(hardware_interface::StateInterface(r_wheel_.name, hardware_interface::HW_IF_POSITION, &r_wheel_.pos));
 
   return state_interfaces;
 }
@@ -57,8 +57,8 @@ std::vector<hardware_interface::CommandInterface> FakeRobot::export_command_inte
 
   std::vector<hardware_interface::CommandInterface> command_interfaces;
 
-  command_interfaces.emplace_back(hardware_interface::CommandInterface(F_l_wheel_.name, hardware_interface::HW_IF_VELOCITY, &F_l_wheel_.cmd));
-  command_interfaces.emplace_back(hardware_interface::CommandInterface(F_r_wheel_.name, hardware_interface::HW_IF_VELOCITY, &F_r_wheel_.cmd));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface(l_wheel_.name, hardware_interface::HW_IF_VELOCITY, &l_wheel_.cmd));
+  command_interfaces.emplace_back(hardware_interface::CommandInterface(r_wheel_.name, hardware_interface::HW_IF_VELOCITY, &r_wheel_.cmd));
 
   return command_interfaces;
 }
@@ -93,8 +93,8 @@ hardware_interface::return_type FakeRobot::read()
 
 
   // Force the wheel position
-  F_l_wheel_.pos = F_l_wheel_.pos + F_l_wheel_l_wheel_.vel * deltaSeconds;
-  F_r_wheel_.pos = F_r_wheel_.pos + F_r_wheel_.vel * deltaSeconds;
+  l_wheel_.pos = l_wheel_.pos + l_wheel_.vel * deltaSeconds;
+  r_wheel_.pos = r_wheel_.pos + r_wheel_.vel * deltaSeconds;
 
   return return_type::OK;
 
