@@ -42,7 +42,7 @@ void ArduinoComms::readEncoderValues(int &val_1, int &val_2, int &val_3, int &va
 void ArduinoComms::setMotorValues(int val_1, int val_2, int val_3, int val_4)
 {
     std::stringstream ss;
-    ss << "m " << val_1 << " " << val_2 << " " << val_3 << " " << val_4 << "\r";
+    ss << "o " << val_1 << " " << val_2 << " " << val_3 << " " << val_4 << "\r";
     sendMsg(ss.str(), false);
 }
 
