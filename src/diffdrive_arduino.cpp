@@ -152,8 +152,8 @@ hardware_interface::return_type DiffDriveArduino::write()
     return return_type::ERROR;
   }
 
-  arduino_.setMotorValues(F_l_wheel_.cmd / F_l_wheel_.rads_per_count / cfg_.loop_rate, F_r_wheel_.cmd / F_r_wheel_.rads_per_count / cfg_.loop_rate,
-                          B_l_wheel_.cmd / B_l_wheel_.rads_per_count / cfg_.loop_rate, B_r_wheel_.cmd / B_r_wheel_.rads_per_count / cfg_.loop_rate);
+  arduino_.setMotorValues(F_l_wheel_.cmd * 18 , F_r_wheel_.cmd *18,
+                          B_l_wheel_.cmd * 18, B_r_wheel_.cmd *18);
 
 
 
