@@ -27,17 +27,33 @@ void ArduinoComms::readEncoderValues(int &val_1, int &val_2, int &val_3, int &va
     std::string response = sendMsg("e\r");
 
     std::string delimiter = " ";
-    size_t del_pos = response.find(delimiter);
-    std::string token_1 = response.substr(0, del_pos);
-    std::string token_2 = response.substr(del_pos + delimiter.length());
-    std::string token_3 = response.substr(del_pos + delimiter.length());
-    std::string token_4 = response.substr(del_pos + delimiter.length());
+    size_t del_pos = 0;
 
-    val_1 = std::atoi(token_1.c_str());
-    val_2 = std::atoi(token_2.c_str());
-    val_3 = std::atoi(token_3.c_str());
-    val_4 = std::atoi(token_4.c_str());
+    // Extract the first value
+    del_pos = response.find(delimiter);
+    val_1 = std::atoi(response.substr(0, del_pos).c_str());
+
+    // Move to the next position after the first delimiter
+    response.erase(0, del_pos + delimiter.length());
+
+    // Extract the second value
+    del_pos = response.find(delimiter);
+    val_2 = std::atoi(response.substr(0, del_pos).c_str());
+
+    // Move to the next position after the second delimiter
+    response.erase(0, del_pos + delimiter.length());
+
+    // Extract the third value
+    del_pos = response.find(delimiter);
+    val_3 = std::atoi(response.substr(0, del_pos).c_str());
+
+    // Move to the next position after the third delimiter
+    response.erase(0, del_pos + delimiter.length());
+
+    // Extract the fourth value
+    val_4 = std::atoi(response.c_str());
 }
+
 
 void ArduinoComms::setMotorValues(int val_1, int val_2, int val_3, int val_4)
 {
